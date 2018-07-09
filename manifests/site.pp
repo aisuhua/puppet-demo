@@ -11,48 +11,18 @@ node default {
 }
 
 node ubuntu-test2 {
-	
-	# if
-	if $operatingsystem == 'Ubuntu' {
-		notify { "I am running on $operatingsystem.":
-
-		}
-	}
-	elsif $operatingsystem == 'CentOS' {
-		notify { "Who are you?":
+	if 10 > 5 {
+		notify { "Ten is larger than five.":
 	
 		}
 	}
-
-	# in
-	if $operatingsystem in ['Ubuntu', 'CentOS'] {
-		notify { "I am ruuning on $operatingsystem.":
+	else {
+		notify { "Then is smaller than five.":
 
 		}
 	}
 
-	# case
-	case $operatingsystem {
-		'Ubuntu': {
-			$variable = 'ubuntu'	
-		}
-		'CentOS': {
-			$variable = 'centos'
-		}
-	}
+	$ten = 5 + 5
 
-	notify { "I an running on $variable.":
-		
-	}
-
-	# selector
-	$mysystem = $operatingsystem ? {
-		'Ubuntu' => 'ubuntu-xxx',
-		'CentOS' => 'centos-xxx',
-	}
-
-	notify { "I am running on $mysystem":
-
-	}
-}
-
+	notify { "5 + 5 is $ten.": }
+}	
