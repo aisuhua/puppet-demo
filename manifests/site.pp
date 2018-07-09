@@ -28,5 +28,9 @@ node ubuntu-test2 {
 		ensure => file,
 		owner => 'suhua',		
 	}
-	
+
+	# client call puppet agent --test --server ubuntu-test3 --tags test
+	notify { 'suhua is a good boy.':
+		tag => 'test',
+	}	
 }
