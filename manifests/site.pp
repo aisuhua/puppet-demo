@@ -11,18 +11,22 @@ node default {
 }
 
 node ubuntu-test2 {
-	if 10 > 5 {
-		notify { "Ten is larger than five.":
 	
-		}
+	# array
+	$arr = ['suhua', 'baidu', 'google']
+	notify { $arr[1]: }
+
+	# hash
+	$hash = {
+		id => 10086,
+		name => 'suhua',
+		sex => 'male',
 	}
-	else {
-		notify { "Then is smaller than five.":
+	notify { $hash['sex']: }
 
-		}
+	file { ['/tmp/file1', '/tmp/file2']:
+		ensure => file,
+		owner => 'suhua',		
 	}
-
-	$ten = 5 + 5
-
-	notify { "5 + 5 is $ten.": }
-}	
+	
+}
