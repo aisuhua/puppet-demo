@@ -10,39 +10,48 @@ node default {
 	include notify
 }
 
-#$myname1 = 'lala'
-#class example {
-#	$myname2 = 'suhua'
-#	notify {"Message from elsewhere: $myname1, $myname2":
-#
-#	}
-#}
-#notify {"I love you $myname1, $myname2":}
-
-$global_variable = 'global'
-
-File {
-	ensure => file,
-	owner => 'suhua'
-}
-
 node ubuntu-test2 {
-	#include example
-	#$parent_variable = 'parent'
-	#include scope_example
+	
+	# if
+	if $operatingsystem == 'Ubuntu' {
+		notify { "I am running on $operatingsystem.":
 
-	$myname = 'suhuazizi'
-	$mybody = 'lalalal'
-	$num = 10
-	notify{ "${myname}${mybody} is am good boy.":
-
+		}
+	}
+	elsif $operatingsystem == 'CentOS' {
+		notify { "Who are you?":
+	
+		}
 	}
 
-	notify { "environment: $environment, cert: $clientcert, version: $clientversion":
+	# in
+	if $operatingsystem in ['Ubuntu', 'CentOS'] {
+		notify { "I am ruuning on $operatingsystem.":
 
+		}
 	}
 
-	notify { "servername: $servername, serverip: $serverip, version: $serverversion, module: $module_name":
+	# case
+	case $operatingsystem {
+		'Ubuntu': {
+			$variable = 'ubuntu'	
+		}
+		'CentOS': {
+			$variable = 'centos'
+		}
+	}
+
+	notify { "I an running on $variable.":
+		
+	}
+
+	# selector
+	$mysystem = $operatingsystem ? {
+		'Ubuntu' => 'ubuntu-xxx',
+		'CentOS' => 'centos-xxx',
+	}
+
+	notify { "I am running on $mysystem":
 
 	}
 }
