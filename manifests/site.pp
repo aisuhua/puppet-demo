@@ -26,9 +26,24 @@ File {
 	owner => 'suhua'
 }
 
-node ubuntu-test3 {
+node ubuntu-test2 {
 	#include example
-	$parent_variable = 'parent'
-	include scope_example
+	#$parent_variable = 'parent'
+	#include scope_example
+
+	$myname = 'suhuazizi'
+	$mybody = 'lalalal'
+	$num = 10
+	notify{ "${myname}${mybody} is am good boy.":
+
+	}
+
+	notify { "environment: $environment, cert: $clientcert, version: $clientversion":
+
+	}
+
+	notify { "servername: $servername, serverip: $serverip, version: $serverversion, module: $module_name":
+
+	}
 }
 
