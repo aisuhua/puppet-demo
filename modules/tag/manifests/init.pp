@@ -1,7 +1,5 @@
 class tag {
 	
-	tag("suhuazizi")	
-
 	file { "/tmp/tag":
 		ensure => file,
 		content => 'I am a tag.',
@@ -12,6 +10,5 @@ class tag {
 		path => '/tmp/tag2',
 		ensure => file,
 		content => 'I am tag2',
-		tag => 'lala',
 	}
 }
