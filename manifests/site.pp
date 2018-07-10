@@ -11,26 +11,8 @@ node default {
 }
 
 node ubuntu-test2 {
-	
-	# array
-	$arr = ['suhua', 'baidu', 'google']
-	notify { $arr[1]: }
-
-	# hash
-	$hash = {
-		id => 10086,
-		name => 'suhua',
-		sex => 'male',
-	}
-	notify { $hash['sex']: }
-
-	file { ['/tmp/file1', '/tmp/file2']:
+	file { "/tmp/$hostname":
 		ensure => file,
-		owner => 'suhua',		
+		content => "I am running on $operatingsystem, ip $ipaddress, kernel $kernel",
 	}
-
-	# client call puppet agent --test --server ubuntu-test3 --tags test
-	notify { 'suhua is a good boy.':
-		tag => 'test',
-	}	
 }
