@@ -10,9 +10,15 @@ node default {
 	include notify
 }
 
-node ubuntu-test2 {
+node base_server {
+	file { '/tmp/base_server':
+		ensure => file,
+		content => 'base_server',
+	}
+}
+
+node ubuntu-test2 inherits base_server {
 	include tag
-	
 }
 
 
